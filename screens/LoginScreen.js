@@ -14,16 +14,15 @@ function LoginScreen() {
     setIsAuthenticating(true);
     try {
       const token = await login(email, password);
+
       authCtx.authenticate(token);
     } catch (error) {
-      console.log("Heko", error);
       Alert.alert(
         "Authentication faild!",
         "Could not log you in. Please chech your credentials or try again later!"
       );
+      setIsAuthenticating(false);
     }
-
-    setIsAuthenticating(false);
   }
   if (isAuthenticating) {
     return <LoadingOverlay message="Logging you in..." />;

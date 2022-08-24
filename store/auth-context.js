@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppLoading from "expo-app-loading";
 
 export const AuthContext = createContext({
   token: "",
@@ -12,10 +14,12 @@ function AuthContextProvider({ children }) {
 
   function authenticate(token) {
     setAuthToken(token);
+    AsyncStorage.setItem("token", token); //to set an item in the device storage
   }
 
   function logout() {
     setAuthToken(null);
+    AsyncStorage.removeItem("token");
   }
 
   const value = {
@@ -29,3 +33,5 @@ function AuthContextProvider({ children }) {
 }
 
 export default AuthContextProvider;
+//To store the token on the device
+//npm install @react-native-async-storage/async-storage

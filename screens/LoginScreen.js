@@ -10,7 +10,6 @@ function LoginScreen() {
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      console.log(email, password);
       await login(email, password);
     } catch (error) {
       console.log("Heko", error);
